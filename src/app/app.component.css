@@ -1,0 +1,14 @@
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar .mode-line {
+    background: hsla(0, 0%, 100%, .15);
+    height: 16px;
+    margin: 16px;
+    width: 1px;
+}
+
+.wallet-address:hover {
+    cursor: pointer;
+}
