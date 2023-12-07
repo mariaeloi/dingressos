@@ -1,0 +1,15 @@
+mat-chip {
+    opacity: 0.7;
+}
+
+.event-card-content-line {
+    font-size: small;
+}
+
+.event-card {
+    cursor: pointer;
+}
+
+.event-card:hover {
+    opacity: 0.7;
+}

@@ -12,3 +12,17 @@ mat-toolbar .mode-line {
 .wallet-address:hover {
     cursor: pointer;
 }
+
+mat-sidenav-content {
+    padding: 16px;
+}
+
+mat-sidenav-content {
+    height: calc(100vh - 96px);
+}
+
+@media (max-width: 600px) {
+    mat-sidenav-content {
+        height: calc(100vh - 88px)
+    }
+}

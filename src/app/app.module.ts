@@ -14,14 +14,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
+import { MatBadgeModule } from '@angular/material/badge';
 import { EventsComponent } from './pages/events/events.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EventCardComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     MatIconModule,
     MatMenuModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

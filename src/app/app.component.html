@@ -1,4 +1,4 @@
-<div style="height: 100vh;">
+<div>
   <mat-toolbar color="primary">
     <img src="assets/dapp-icon.png" alt="Ícone de ingressos" />
     <a class="mode-line" fxHide.lt-md="true"></a>
@@ -6,10 +6,11 @@
       <a mat-button routerLink="/eventos">Eventos</a>
       <a mat-button routerLink="/meus-ingressos">Meus Ingressos</a>
       <a mat-button routerLink="/trocas">Trocas</a>
+      <a mat-button routerLink="/criadores-eventos">Criadores de Eventos</a>
     </div>
     <span class="toolbar-spacer"></span>
     <div fxShow="true" fxHide.lt-md="true" *ngIf="!(isConnected | async)">
-      <button mat-flat-button color="accent" (click)="connectWallet()">Conectar Carteira</button>
+      <button mat-flat-button color="warn" (click)="connectWallet()">Conectar Carteira</button>
     </div>
     <div fxFlexAlign="center" *ngIf="(isConnected | async)">
       <a mat-chip matTooltip="Copiar endereço" (click)="copyAddress()">
@@ -27,14 +28,15 @@
   <mat-sidenav-container fxFlexFill>
     <mat-sidenav fxFlexFill color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
       <div fxLayout="column">
-        <a mat-button routerLink="/eventos" (click)="sidenav.toggle()">Eventos</a>
-        <a mat-button routerLink="/meus-ingressos" (click)="sidenav.toggle()">Meus Ingressos</a>
-        <a mat-button routerLink="/trocas" (click)="sidenav.toggle()">Trocas</a>
-        <button mat-flat-button color="accent" (click)="connectWallet()" *ngIf="!(isConnected | async)">Conectar Carteira</button>
+        <a mat-button routerLink="/eventos" (click)="sidenav.close()">Eventos</a>
+        <a mat-button routerLink="/meus-ingressos" (click)="sidenav.close()">Meus Ingressos</a>
+        <a mat-button routerLink="/trocas" (click)="sidenav.close()">Trocas</a>
+        <a mat-button routerLink="/criadores-eventos" (click)="sidenav.close()">Criadores de Eventos</a>
+        <button mat-flat-button color="warn" (click)="connectWallet()" *ngIf="!(isConnected | async)">Conectar Carteira</button>
       </div>
     </mat-sidenav>
-    <mat-sidenav-content fxFlexFill>
-      <router-outlet></router-outlet>
+    <mat-sidenav-content>
+      <router-outlet fxFlexFill></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

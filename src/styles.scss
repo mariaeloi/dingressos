@@ -4,7 +4,7 @@
 @include mat-core();
 
 $custom-app-primary: mat-palette($mat-grey, 900);
-$custom-app-accent: mat-palette($mat-deep-purple);
+$custom-app-accent: mat-palette($mat-blue);
 $custom-app-warn: mat-palette($mat-amber);
 $custom-app-theme: mat-dark-theme($custom-app-primary, $custom-app-accent, $custom-app-warn);
 
