@@ -1,1 +1,29 @@
-<p>events works!</p>
+<div fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutAlign="end">
+    <span matTooltip="Conecte sua carteira primeiro" [matTooltipDisabled]="(isConnected | async)" fxFlex.lt-sm="100%">
+      <button mat-flat-button color="accent"
+        fxFlex.lt-sm="100%"
+        [disabled]="!(isConnected | async)"
+        (click)="createEvent()">
+        + Novo Evento
+      </button>
+    </span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <mat-chip-listbox (change)="onChangeChip($event)">
+      <mat-chip-option selected>Todos</mat-chip-option>
+      <mat-chip-option>Disponíveis</mat-chip-option>
+      <mat-chip-option>Meus Eventos</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+  <div fxLayout.gt-sm="row wrap" fxLayout="column">
+    <div *ngFor="let eventDapp of (eventsDapp | async)" fxFlex="100%"
+      [fxFlex.gt-lg]="100 / 4 + '%'"
+      [fxFlex.gt-md]="100 / 3 + '%'"
+      [fxFlex.gt-sm]="100 / 2 + '%'"
+      style="padding: 8px;">
+      <app-event-card [eventDapp]="eventDapp"></app-event-card>
+    </div>
+    <div *ngIf="!(eventsDapp | async)?.length" fxFlex fxLayoutAlign="center start">Nenhum evento encontrado.</div>
+  </div>
+</div>

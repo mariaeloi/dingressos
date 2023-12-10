@@ -14,14 +14,25 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EventsComponent } from './pages/events/events.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
+import { EventFormComponent } from './components/event-form/event-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EventCardComponent,
+    EventFormComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +47,14 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     MatIconModule,
     MatMenuModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule,
+    MatBadgeModule,
+    MatDialogModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
