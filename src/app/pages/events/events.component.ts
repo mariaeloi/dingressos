@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 import { EventFormComponent } from 'src/app/components/event-form/event-form.component';
 import { EventDapp } from 'src/app/models/event';
 import { TicketManagerService } from 'src/app/services/ticket-manager.service';
-import { TicketService } from 'src/app/services/ticket.service';
 import { Web3Service } from 'src/app/services/web3.service';
 
 @Component({
@@ -24,14 +23,16 @@ export class EventsComponent implements OnInit {
   constructor(
     private web3Service: Web3Service,
     private ticketManagerService: TicketManagerService,
-    private ticketService: TicketService,
     public dialog: MatDialog,  
   ) {
     this.isConnected = web3Service.isConnected;
   }
 
   ngOnInit(): void {
-    this.initEvents();
+    this.ticketManagerService.allEvents$.subscribe(list => {
+      this.eventsAll = list;
+      this.onChangeFilter();
+    });
   }
 
   async onChangeChip(chip: MatChipListboxChange) {
@@ -60,26 +61,6 @@ export class EventsComponent implements OnInit {
   }
 
   createEvent() {
-    // TODO
-    const dialogRef = this.dialog.open(EventFormComponent, {disableClose: true});
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-  private async initEvents() {
-    let addresses = await this.ticketManagerService.getEventsAddress();
-    addresses = addresses.reverse();
-    // buscar dados dos eventos
-    for(let address of addresses) {
-      this.ticketService.getEventContent(address).then(result => {
-        this.eventsAll.push(result);
-        this.eventsDapp.next([
-          ...this.eventsDapp.getValue(),
-          result
-        ]);
-      });
-    }
+    this.dialog.open(EventFormComponent, {disableClose: true});
   }
 }

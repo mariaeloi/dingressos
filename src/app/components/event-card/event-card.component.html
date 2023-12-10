@@ -11,11 +11,14 @@
       <div fxFlex="row" style="padding-bottom: 8px;">
         <mat-card-title>
           {{eventDapp.title}}
-          <a mat-icon-button matTooltip="Ver contrato" href="{{ticketLink()}}" target="_blank">
-            <mat-icon>open_in_new</mat-icon>
-          </a>
+          <mat-icon matTooltip="Ver contrato" (click)="openTicketContract()" class="event-card-content-line" style="cursor: pointer;" >open_in_new</mat-icon>
         </mat-card-title>
-        <!-- <mat-card-subtitle>({{eventDapp.symbol}})</mat-card-subtitle> -->
+        <mat-card-subtitle *ngIf="eventDapp.ticketsAvailable != 1; else restaUmIngresso">
+          {{eventDapp.ticketsAvailable}} ingressos disponíveis
+        </mat-card-subtitle>
+        <ng-template #restaUmIngresso>
+          <mat-card-subtitle>{{eventDapp.ticketsAvailable}} ingresso disponível</mat-card-subtitle>
+        </ng-template>
       </div>
     </mat-card-header>
     <mat-card-content fxFlex="column">
@@ -24,7 +27,7 @@
         <p class="event-card-content-line" style="padding-left: 4px;">{{eventDapp.location}}</p>
       </div>
       <div fxLayout="row" fxLayoutAlign="end center">
-        <p class="event-card-content-line">Ingresso por {{eventDapp.price}} wei</p>
+        <p class="event-card-content-line">1 ingresso por {{eventDapp.price}} wei</p>
       </div>
       <div fxLayout="row" fxLayoutAlign="end center">
         <span matTooltip="Conecte sua carteira primeiro" [matTooltipDisabled]="(isConnected | async)" fxFlex.lt-sm="100%">

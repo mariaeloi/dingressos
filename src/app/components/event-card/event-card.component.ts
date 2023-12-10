@@ -31,7 +31,8 @@ export class EventCardComponent {
     console.log('event dapp:', this.eventDapp);
   }
 
-  ticketLink() {
-    return `${environment.scanBaseUrl}/address/${this.eventDapp.tokenContract}`;
+  openTicketContract() {
+    const url = `${environment.scanBaseUrl}/address/${this.eventDapp.tokenContract}`;
+    window.open(url, '_blank');
   }
 }

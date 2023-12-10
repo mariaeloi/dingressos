@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { TicketManagerService } from 'src/app/services/ticket-manager.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class EventFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private ticketManagerService: TicketManagerService,
-    private dialogRef: MatDialog,
   ) { }
 
   async onSubmit() {
@@ -33,6 +31,5 @@ export class EventFormComponent {
     const form = this.eventForm.value;
     const dataString = form.datetime.toString();
     this.ticketManagerService.createEvent(form.title, form.symbol, form.amount, form.price, dataString, form.location);
-    this.dialogRef.closeAll();
   }
 }
