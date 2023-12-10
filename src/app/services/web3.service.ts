@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { EventDapp } from '../models/event';
+import { RegisteredSubscription } from 'web3/lib/commonjs/eth.exports';
 
 declare let window: any;
 
@@ -12,18 +13,16 @@ declare let window: any;
   providedIn: 'root'
 })
 export class Web3Service {
-  private web3: any = null;
+  private web3: Web3<RegisteredSubscription> | null = null;
   get web3Intance() { return this.web3; }
 
   static chainId = new BehaviorSubject<string>('');
   static walletAddress = new BehaviorSubject<string>('');
   static walletConnected = new BehaviorSubject<boolean>(false);
-  static isEventCreator = new BehaviorSubject<boolean>(false);
   static isOwner = new BehaviorSubject<boolean>(false);
 
   get isConnected() { return Web3Service.walletConnected }
   get wallet() { return Web3Service.walletAddress }
-  get isEventCreator() { return Web3Service.isEventCreator }
   get isOwner() { return Web3Service.isOwner }
 
   constructor(private _snackBar: MatSnackBar) {
@@ -102,8 +101,7 @@ export class Web3Service {
     } else if (accounts[0] !== Web3Service.walletAddress.getValue() && Web3Service.chainId.getValue() === environment.chainId) {
       Web3Service.walletAddress.next(accounts[0]);
       Web3Service.walletConnected.next(true);
-      // TODO verificar se é criador de evento ou dono do contrato
-      // Web3Service.isEventCreator.next(true);
+      // TODO verificar se é o dono do contrato
       // Web3Service.isOwner.next(true);
     }
   }
@@ -111,16 +109,15 @@ export class Web3Service {
   private static logout() {
     Web3Service.walletConnected.next(false);
     Web3Service.walletAddress.next('');
-    Web3Service.isEventCreator.next(false);
     Web3Service.isOwner.next(false);
   }
 
   public getEvents(): EventDapp[] {
     // TODO
     return [
-      { creator: '0x0', tokenContract: '0x0', title: 'Evento de Teste 3', datetime: new Date(2024, 1, 1), location: 'Brasil', category: 'Festa', ticketsAvailable: 7 },
-      { creator: '0x0', tokenContract: '0x0', title: 'Evento de Teste 2', datetime: new Date(2024, 0, 1), location: 'Brasil', category: 'Esportes', ticketsAvailable: 0 },
-      { creator: '0x0', tokenContract: '0x0', title: 'Evento de Teste 1', datetime: new Date(2023, 11, 1), location: 'Brasil', category: 'Palestra', ticketsAvailable: 1 },
+      { creator: '0x0', tokenContract: '0x0', title: 'Evento de Teste 3', datetime: new Date(2024, 1, 1), location: 'Brasil', price: 100, ticketsAvailable: 7 },
+      { creator: '0x0', tokenContract: '0x0', title: 'Evento de Teste 2', datetime: new Date(2024, 0, 1), location: 'Brasil', price: 1000000, ticketsAvailable: 0 },
+      { creator: '0x0', tokenContract: '0x0', title: 'Evento de Teste 1', datetime: new Date(2023, 11, 1), location: 'Brasil', price: 10000, ticketsAvailable: 1 },
     ] as EventDapp[];
   }
 }

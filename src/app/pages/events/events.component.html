@@ -1,9 +1,9 @@
 <div fxLayout="column" fxLayoutGap="8px">
   <div fxLayout="row" fxLayoutAlign="end">
-    <span matTooltip="Somente criadores de eventos" [matTooltipDisabled]="(isEventCreator | async)" fxFlex.lt-sm="100%">
+    <span matTooltip="Conecte sua carteira primeiro" [matTooltipDisabled]="(isConnected | async)" fxFlex.lt-sm="100%">
       <button mat-flat-button color="accent"
         fxFlex.lt-sm="100%"
-        [disabled]="!(isEventCreator | async)"
+        [disabled]="!(isConnected | async)"
         (click)="createEvent()">
         + Novo Evento
       </button>
@@ -11,11 +11,9 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="start">
     <mat-chip-listbox (change)="onChangeChip($event)">
-      <div matTooltip="Somente criadores de eventos" matTooltipPosition="above" [matTooltipDisabled]="(isEventCreator | async)">
-        <mat-chip-option [disabled]="!(isEventCreator | async)">Meus Eventos</mat-chip-option>
-      </div>
       <mat-chip-option selected>Todos</mat-chip-option>
       <mat-chip-option>Disponíveis</mat-chip-option>
+      <mat-chip-option>Meus Eventos</mat-chip-option>
     </mat-chip-listbox>
   </div>
   <div fxLayout.gt-sm="row wrap" fxLayout="column">

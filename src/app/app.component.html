@@ -5,8 +5,6 @@
     <div fxShow="true" fxHide.lt-md="true">
       <a mat-button routerLink="/eventos">Eventos</a>
       <a mat-button routerLink="/meus-ingressos">Meus Ingressos</a>
-      <a mat-button routerLink="/trocas">Trocas</a>
-      <a mat-button routerLink="/criadores-eventos">Criadores de Eventos</a>
     </div>
     <span class="toolbar-spacer"></span>
     <div fxShow="true" fxHide.lt-md="true" *ngIf="!(isConnected | async)">
@@ -30,8 +28,6 @@
       <div fxLayout="column">
         <a mat-button routerLink="/eventos" (click)="sidenav.close()">Eventos</a>
         <a mat-button routerLink="/meus-ingressos" (click)="sidenav.close()">Meus Ingressos</a>
-        <a mat-button routerLink="/trocas" (click)="sidenav.close()">Trocas</a>
-        <a mat-button routerLink="/criadores-eventos" (click)="sidenav.close()">Criadores de Eventos</a>
         <button mat-flat-button color="warn" (click)="connectWallet()" *ngIf="!(isConnected | async)">Conectar Carteira</button>
       </div>
     </mat-sidenav>

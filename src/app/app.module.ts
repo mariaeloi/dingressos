@@ -16,16 +16,23 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EventsComponent } from './pages/events/events.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
+import { EventFormComponent } from './components/event-form/event-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventsComponent,
     PageNotFoundComponent,
-    EventCardComponent
+    EventCardComponent,
+    EventFormComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,12 @@ import { EventCardComponent } from './components/event-card/event-card.component
     MatChipsModule,
     MatTooltipModule,
     MatCardModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDialogModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

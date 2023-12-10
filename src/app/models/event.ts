@@ -4,6 +4,7 @@ export interface EventDapp {
     datetime: Date;         // data e hora do evento
     location: string;
     title: string;
-    category: string;
+    symbol: string;
+    price: number;
     ticketsAvailable: number;
 }

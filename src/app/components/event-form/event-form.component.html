@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>Evento</h2>
+<mat-dialog-content class="mat-typography">
+  <form fxLayout="column" [formGroup]="eventForm">
+    <div fxLayout="row wrap">
+      <mat-form-field fxLayout="column" fxFlex.gt-sm="70%" fxFlex="100%" style="padding: 4px">
+        <mat-label>Título</mat-label>
+        <input type="text" matInput #title maxlength="50" formControlName="title" placeholder="Ex. Curso de Blockchain">
+        <mat-hint align="end">{{title.value.length}} / 50</mat-hint>
+        <mat-error [fxShow]="eventForm.get('title')?.hasError('required')">Campo <strong>obrigatório</strong></mat-error>
+      </mat-form-field>
+      <mat-form-field fxLayout="column" fxFlex.gt-sm="30%" fxFlex="100%" style="padding: 4px">
+        <mat-label>Data e horário</mat-label>
+        <input type="datetime-local" matInput formControlName="datetime">
+        <mat-error [fxShow]="eventForm.get('datetime')?.hasError('required')">Campo <strong>obrigatório</strong></mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxLayout="column" fxFlex="100%" style="padding: 4px">
+        <mat-label>Local do evento</mat-label>
+        <input type="text" matInput #location maxlength="100" formControlName="location" placeholder="Ex. Instituto Metrópole Digital, Sala A101">
+        <mat-hint align="end">{{location.value.length}} / 100</mat-hint>
+        <mat-error [fxShow]="eventForm.get('location')?.hasError('required')">Campo <strong>obrigatório</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <h3 style="padding-top: 8px; padding-left: 4px; padding-right: 4px;">Informações dos ingressos</h3>
+    <div fxLayout="row wrap">
+      <mat-form-field fxLayout="column" fxFlex.gt-xs="30%" fxFlex="100%" style="padding: 4px">
+        <mat-label>Símbolo</mat-label>
+        <input matInput #ticketSymbol maxlength="5" formControlName="symbol">
+        <mat-hint align="end">{{ticketSymbol.value.length}} / 5</mat-hint>
+        <mat-error [fxShow]="eventForm.get('symbol')?.hasError('required')">Campo <strong>obrigatório</strong></mat-error>
+      </mat-form-field>
+      <mat-form-field fxLayout="column" fxFlex.gt-xs="30%" fxFlex="100%" style="padding: 4px">
+        <mat-label>Quantidade</mat-label>
+        <input type="number" min="1" matInput formControlName="amount">
+        <mat-error [fxShow]="eventForm.get('amount')?.hasError('required')">Campo <strong>obrigatório</strong></mat-error>
+        <mat-error [fxShow]="eventForm.get('amount')?.hasError('min')">Quantidade deve ser <strong>maior ou igual a 1</strong></mat-error>
+      </mat-form-field>
+      <mat-form-field fxLayout="column" fxFlex.gt-xs="40%" fxFlex="100%" style="padding: 4px">
+        <mat-label>Preço em Wei</mat-label>
+        <input type="number" min="10" matInput formControlName="price" placeholder="Valor em wei">
+        <mat-error [fxShow]="eventForm.get('price')?.hasError('required')">Campo <strong>obrigatório</strong></mat-error>
+        <mat-error [fxShow]="eventForm.get('price')?.hasError('min')">Preço deve ser <strong>maior ou igual a 10</strong></mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button color="accent" (click)="onSubmit()">Adicionar</button>
+</mat-dialog-actions>
