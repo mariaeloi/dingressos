@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { EventDapp } from 'src/app/models/event';
+import { TicketService } from 'src/app/services/ticket.service';
 import { Web3Service } from 'src/app/services/web3.service';
 import { environment } from 'src/environments/environment.development';
 
@@ -13,7 +14,7 @@ export class EventCardComponent {
   @Input() eventDapp: EventDapp = {} as EventDapp;
   isConnected: BehaviorSubject<boolean>;
 
-  constructor(private web3Service: Web3Service) {
+  constructor(web3Service: Web3Service, private ticketService: TicketService) {
     this.isConnected = web3Service.isConnected;
   }
 
@@ -28,7 +29,7 @@ export class EventCardComponent {
   }
 
   buyTicket() {
-    console.log('event dapp:', this.eventDapp);
+    this.ticketService.buyTicket(this.eventDapp);
   }
 
   openTicketContract() {
