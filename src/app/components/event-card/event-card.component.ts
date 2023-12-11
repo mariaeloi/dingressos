@@ -44,7 +44,7 @@ export class EventCardComponent implements OnInit{
   }
 
   withdraw () {
-    this.ticketService.withDraw(this.eventDapp);
+    this.ticketService.withDraw(this.eventDapp, this);
   }
 
   async getOwnerAmount(){

@@ -5,6 +5,7 @@ import { RegisteredSubscription } from 'web3/lib/commonjs/eth.exports';
 import { EventDapp } from '../models/event';
 import { Web3Service } from './web3.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventCardComponent } from '../components/event-card/event-card.component';
 
 declare let window: any;
 
@@ -33,7 +34,7 @@ export class TicketService {
     return result;
   }
 
-  async withDraw(eventDapp: EventDapp){
+  async withDraw(eventDapp: EventDapp, eventComponent: EventCardComponent){
 
     if (this.web3 == null) {
       return;
@@ -54,7 +55,8 @@ export class TicketService {
         duration: 5000,
         verticalPosition: 'bottom'
       });
-      eventDapp.ticketsAvailable--;
+      eventComponent.balance = 0;
+
     })
     .on('error', (error: any, receipt: any) => {
       // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
