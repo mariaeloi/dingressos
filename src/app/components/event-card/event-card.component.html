@@ -26,12 +26,19 @@
         <mat-icon class="event-card-content-line" style="padding-top: 3px;">location_on</mat-icon>
         <p class="event-card-content-line" style="padding-left: 4px;">{{eventDapp.location}}</p>
       </div>
+      <div fxLayout="row" fxLayoutAlign="start start" [fxHide]="wallet != eventDapp.creator.toLowerCase() || !(isConnected | async)">
+        <p class="event-card-content-line" style="padding-left: 4px;">Total arrecadado: {{balance}} wei</p>
+      </div>
       <div fxLayout="row" fxLayoutAlign="end center">
         <p class="event-card-content-line">1 ingresso por {{eventDapp.price}} wei</p>
       </div>
       <div fxLayout="row" fxLayoutAlign="end center">
         <span matTooltip="Conecte sua carteira primeiro" [matTooltipDisabled]="(isConnected | async)" fxFlex.lt-sm="100%">
-          <button mat-flat-button color="accent" fxFlex.lt-sm="100%"
+          <button mat-flat-button color="accent" fxFlex.lt-sm="100%" style="margin-right: 10px;"
+            [fxHide]="wallet != eventDapp.creator.toLowerCase() || !(isConnected | async)" (click)="withdraw()">
+            Sacar
+          </button>
+          <button mat-flat-button color="accent" fxFlex.lt-sm="100%" 
             [disabled]="getEventStatus() != 'Disponível' || !(isConnected | async)" (click)="buyTicket()">
             Comprar ingresso
           </button>

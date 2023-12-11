@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { EventDapp } from 'src/app/models/event';
 import { TicketService } from 'src/app/services/ticket.service';
@@ -10,12 +10,23 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './event-card.component.html',
   styleUrls: ['./event-card.component.css']
 })
-export class EventCardComponent {
+
+export class EventCardComponent implements OnInit{
   @Input() eventDapp: EventDapp = {} as EventDapp;
   isConnected: BehaviorSubject<boolean>;
-
+  balance: number;
+  
+  wallet = Web3Service.walletAddress.getValue();
+  
   constructor(web3Service: Web3Service, private ticketService: TicketService) {
     this.isConnected = web3Service.isConnected;
+    this.balance = 0;
+
+  }
+  
+  ngOnInit(): void {
+    if (this.wallet == this.eventDapp.creator.toLocaleLowerCase())
+    this.getOwnerAmount();
   }
 
   getEventStatus() {
@@ -30,6 +41,16 @@ export class EventCardComponent {
 
   buyTicket() {
     this.ticketService.buyTicket(this.eventDapp);
+  }
+
+  withdraw () {
+    this.ticketService.withDraw(this.eventDapp);
+  }
+
+  async getOwnerAmount(){
+    this.balance = await this.ticketService.getOwnerAmount(this.eventDapp.tokenContract.toLowerCase());
+    console.log(this.balance);
+    return this.balance;
   }
 
   openTicketContract() {

@@ -21,6 +21,50 @@ export class TicketService {
     this.web3 = new Web3(window.ethereum);
   }
 
+
+  async getOwnerAmount(contractAddress: string){
+
+    if (this.web3 == null) {
+      return;
+    }
+
+    const ticketContract: any = new this.web3.eth.Contract(TicketAbi, contractAddress);
+    const result = await ticketContract.methods.getOwnerAmount().call();
+    return result;
+  }
+
+  async withDraw(eventDapp: EventDapp){
+
+    if (this.web3 == null) {
+      return;
+    }
+
+    const ticketContract: any = new this.web3.eth.Contract(TicketAbi, eventDapp.tokenContract);
+    
+    ticketContract.methods.withdraw()
+    .send({ from: Web3Service.walletAddress.getValue()})
+    .on('transactionHash', (_: any) => {
+      this.snackBar.open('Transação criada! Aguardando confirmação do saque', 'Ok', {
+        duration: 5000,
+        verticalPosition: 'bottom'
+      });
+    })
+    .on('receipt', (_: any) => {
+      this.snackBar.open(`Ingresso ${eventDapp.symbol} sacado com sucesso!`, 'Ok', {
+        duration: 5000,
+        verticalPosition: 'bottom'
+      });
+      eventDapp.ticketsAvailable--;
+    })
+    .on('error', (error: any, receipt: any) => {
+      // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      this.snackBar.open('Ocorreu um erro no saque!', 'Ok', {
+        duration: 5000,
+        verticalPosition: 'bottom'
+      });
+    });
+  }
+
   async buyTicket(eventDapp: EventDapp) {
     if (this.web3 == null) {
       return;
