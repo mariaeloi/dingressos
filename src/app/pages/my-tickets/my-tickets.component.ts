@@ -13,15 +13,24 @@ export class MyTicketsComponent implements OnInit {
   ticketsPerEvent: Record<string, EventTickets> = {};
   eventsAddress: string[] = [];
 
+  static instance: MyTicketsComponent;
+
   constructor(
     private ticketManagerService: TicketManagerService,
     private ticketService: TicketService,
-  ) { }
+  ) {
+    if (MyTicketsComponent.instance) {
+      return MyTicketsComponent.instance;
+    } else {
+      MyTicketsComponent.instance = this;
+    }
+  }
 
   ngOnInit(): void {
     this.ticketManagerService.allEvents$.subscribe(async events => {
       for (let eventDapp of events) {
         this.updateEventTickets(eventDapp);
+        this.ticketService.subscribeTicketPurchased(eventDapp.tokenContract);
       }
     });
   }
