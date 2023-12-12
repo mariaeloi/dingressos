@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import Web3 from 'web3';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';

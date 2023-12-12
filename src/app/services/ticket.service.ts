@@ -6,6 +6,7 @@ import { EventDapp } from '../models/event';
 import { Web3Service } from './web3.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EventCardComponent } from '../components/event-card/event-card.component';
+import { MyTicketsComponent } from '../pages/my-tickets/my-tickets.component';
 
 declare let window: any;
 
@@ -51,7 +52,7 @@ export class TicketService {
       });
     })
     .on('receipt', (_: any) => {
-      this.snackBar.open(`Ingresso ${eventDapp.symbol} sacado com sucesso!`, 'Ok', {
+      this.snackBar.open(`Saque realizado com sucesso!`, 'Ok', {
         duration: 5000,
         verticalPosition: 'bottom'
       });
@@ -117,5 +118,35 @@ export class TicketService {
       ticketsAvailable: Number(result.ticketsAvailable),
     };
     return eventDapp;
+  }
+
+  async getEventTickets(contractAddress: string): Promise<number[]> {
+    if (this.web3 == null) {
+      return [];
+    }
+    // instanciar contrato do ticket
+    const ticketContract: any = new this.web3.eth.Contract(TicketAbi, contractAddress);
+    // buscar ingressos do usuário
+    const result = await ticketContract.methods.getUserTickets().call({ from: Web3Service.walletAddress.getValue() });
+    return result;
+  }
+
+  subscritions: string[] = [];
+  public subscribeTicketPurchased(contractAddress: string) {
+    if (this.web3 == null) {
+      return;
+    }
+
+    if (this.subscritions.includes(contractAddress)) {
+      return;
+    }
+
+    const ticketContract: any = new this.web3.eth.Contract(TicketAbi, contractAddress);
+    ticketContract.events.TicketPurchased({filter: {buyer: Web3Service.walletAddress.getValue()}})
+      .on('data', (_: any) => {
+        MyTicketsComponent.instance.ngOnInit();
+      });
+
+    this.subscritions.push(contractAddress);
   }
 }

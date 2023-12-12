@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Ingressos</h2>
+<mat-dialog-content class="mat-typography" fxLayout.gt-sm="row wrap" fxLayout="column">
+  <div *ngFor="let ticket of tickets" fxLayout.gt-sm="row wrap" fxLayout="column" fxFlex="100%"
+    [fxFlex.gt-lg]="100 / (tickets.length > 8 ? 8 : tickets.length) + '%'"
+    [fxFlex.gt-md]="100 / (tickets.length > 5 ? 5 : tickets.length) + '%'"
+    [fxFlex.gt-sm]="100 / (tickets.length > 4 ? 4 : tickets.length) + '%'"
+    style="padding: 8px;">
+    <button mat-fab extended color="primary" (click)="openTicketNft(ticket)">
+      <mat-icon>open_in_new</mat-icon>
+      {{symbol}}#{{ticket}}
+    </button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

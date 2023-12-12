@@ -25,6 +25,9 @@ import { EventsComponent } from './pages/events/events.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { EventFormComponent } from './components/event-form/event-form.component';
+import { MyTicketsComponent } from './pages/my-tickets/my-tickets.component';
+import { TicketCardComponent } from './components/ticket-card/ticket-card.component';
+import { TicketsListComponent } from './components/tickets-list/tickets-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { EventFormComponent } from './components/event-form/event-form.component
     EventsComponent,
     PageNotFoundComponent,
     EventCardComponent,
-    EventFormComponent
+    EventFormComponent,
+    MyTicketsComponent,
+    TicketCardComponent,
+    TicketsListComponent
   ],
   imports: [
     BrowserModule,

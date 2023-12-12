@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutGap="8px">
+  <h1>Meus Ingressos</h1>
+  <div fxLayout.gt-sm="row wrap" fxLayout="column">
+    <div *ngFor="let address of eventsAddress" fxFlex="100%"
+      [fxFlex.gt-lg]="100 / 4 + '%'"
+      [fxFlex.gt-md]="100 / 3 + '%'"
+      [fxFlex.gt-sm]="100 / 2 + '%'"
+      style="padding: 8px;">
+      <app-ticket-card [eventTickets]="ticketsPerEvent[address]"></app-ticket-card>
+    </div>
+    <div *ngIf="!eventsAddress.length" fxFlex fxLayoutAlign="center start">Nenhum ingresso encontrado.</div>
+  </div>
+</div>
