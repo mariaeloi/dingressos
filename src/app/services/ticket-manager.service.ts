@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Web3 from 'web3';
 import { RegisteredSubscription } from 'web3/lib/commonjs/eth.exports';
 import { TicketManagerAbi } from '../../abis/ticket-manager';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Web3Service } from './web3.service';
 import { BehaviorSubject } from 'rxjs';
 import { EventDapp } from '../models/event';

@@ -1,0 +1,26 @@
+<div>
+  <mat-card class="ticket-card">
+    <mat-card-header fxLayout="column">
+      <div fxFlex="row" style="padding-bottom: 8px;">
+        <mat-card-title>
+          {{eventTickets.event.title}}
+        </mat-card-title>
+        <mat-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="ticket-card-content-line">event</mat-icon>
+          <p class="ticket-card-content-line">{{eventTickets.event.datetime.toLocaleString()}}</p>
+        </mat-card-subtitle>
+      </div>
+    </mat-card-header>
+    <mat-card-content fxFlex="column">
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <mat-icon class="ticket-card-content-line" style="padding-top: 3px;">location_on</mat-icon>
+        <p class="ticket-card-content-line" style="padding-left: 4px;">{{eventTickets.event.location}}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-flat-button color="accent" fxFlex.lt-sm="100%" (click)="seeTickets()">
+          {{eventTickets.tickets.length}} ingressos
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

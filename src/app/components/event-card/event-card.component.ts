@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { EventDapp } from 'src/app/models/event';
 import { TicketService } from 'src/app/services/ticket.service';
 import { Web3Service } from 'src/app/services/web3.service';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-event-card',
@@ -49,7 +49,7 @@ export class EventCardComponent implements OnInit{
 
   async getOwnerAmount(){
     this.balance = await this.ticketService.getOwnerAmount(this.eventDapp.tokenContract.toLowerCase());
-    console.log(this.balance);
+    // console.log(this.balance);
     return this.balance;
   }
 

@@ -51,7 +51,7 @@ export class TicketService {
       });
     })
     .on('receipt', (_: any) => {
-      this.snackBar.open(`Ingresso ${eventDapp.symbol} sacado com sucesso!`, 'Ok', {
+      this.snackBar.open(`Saque realizado com sucesso!`, 'Ok', {
         duration: 5000,
         verticalPosition: 'bottom'
       });
@@ -117,5 +117,16 @@ export class TicketService {
       ticketsAvailable: Number(result.ticketsAvailable),
     };
     return eventDapp;
+  }
+
+  async getEventTickets(contractAddress: string): Promise<number[]> {
+    if (this.web3 == null) {
+      return [];
+    }
+    // instanciar contrato do ticket
+    const ticketContract: any = new this.web3.eth.Contract(TicketAbi, contractAddress);
+    // buscar ingressos do usuário
+    const result = await ticketContract.methods.getUserTickets().call({ from: Web3Service.walletAddress.getValue() });
+    return result;
   }
 }
